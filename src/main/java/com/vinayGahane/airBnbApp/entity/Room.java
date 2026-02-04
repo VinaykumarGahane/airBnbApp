@@ -1,6 +1,5 @@
 package com.vinayGahane.airBnbApp.entity;
 
-import com.vinayGahane.airBnbApp.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
+
 
 @Entity
 @Getter
