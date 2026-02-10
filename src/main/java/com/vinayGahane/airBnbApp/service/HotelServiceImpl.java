@@ -5,6 +5,7 @@ import com.vinayGahane.airBnbApp.entity.Hotel;
 import com.vinayGahane.airBnbApp.entity.Room;
 import com.vinayGahane.airBnbApp.exception.ResourceNotFoundException;
 import com.vinayGahane.airBnbApp.repository.HotelRepository;
+import com.vinayGahane.airBnbApp.repository.RoomRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +18,13 @@ import org.springframework.stereotype.Service;
 public class HotelServiceImpl implements HotelService {
 
     private final HotelRepository hotelRepository;
+    private final RoomRepository roomRepository;
 
     private final ModelMapper modelMapper;
 
     private final InventoryService inventoryService;
+
+
 
     @Override
     public HotelDto createNewHotel(HotelDto hotelDto) {
@@ -64,10 +68,12 @@ public class HotelServiceImpl implements HotelService {
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Hotel not found with ID: "+id));
 
-        hotelRepository.deleteById(id);
+
         for(Room room: hotel.getRooms()) {
-            inventoryService.deleteFutureInventories(room);
+            inventoryService.deleteAllInventories(room);
+            roomRepository.deleteById(room.getId());
         }
+        hotelRepository.deleteById(id);
     }
 
     @Override
