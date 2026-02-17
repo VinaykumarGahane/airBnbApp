@@ -1,6 +1,7 @@
 package com.vinayGahane.airBnbApp.service;
 
 import com.vinayGahane.airBnbApp.dto.HotelDto;
+import com.vinayGahane.airBnbApp.dto.HotelPriceDto;
 import com.vinayGahane.airBnbApp.dto.HotelSearchRequest;
 import com.vinayGahane.airBnbApp.entity.Room;
 import org.jspecify.annotations.Nullable;
@@ -13,5 +14,5 @@ public interface InventoryService {
 
     void deleteAllInventories(Room room);
 
-    Page<HotelDto> searchHotels(HotelSearchRequest request);
+    Page<HotelPriceDto> searchHotels(HotelSearchRequest request);
 }
